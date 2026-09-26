@@ -1,0 +1,5 @@
+{
+  "name": "Birdsong.Runtime",
+  "references": ["Unity.ugui"],
+  "autoReferenced": true
+}

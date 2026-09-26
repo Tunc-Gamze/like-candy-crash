@@ -1,0 +1,11 @@
+{
+  "scoring": { "three": 100, "four": 200, "five": 300, "extra": 100 },
+  "levels": [
+    { "title": "First flight", "moves": 20, "objectives": [{ "kind": 0, "label": "Score", "target": 1000 }] },
+    { "title": "Finding a rhythm", "moves": 22, "objectives": [{ "kind": 0, "label": "Score", "target": 2000 }] },
+    { "title": "Blue skies", "moves": 22, "objectives": [{ "kind": 1, "label": "Blue birds", "target": 15, "color": 2 }] },
+    { "title": "Sunrise chorus", "moves": 22, "objectives": [{ "kind": 1, "label": "Red birds", "target": 12, "color": 0 }, { "kind": 1, "label": "Yellow birds", "target": 12, "color": 5 }] },
+    { "title": "Soaring higher", "moves": 18, "objectives": [{ "kind": 0, "label": "Score", "target": 4000 }] },
+    { "title": "The grand migration", "moves": 22, "objectives": [{ "kind": 0, "label": "Score", "target": 5000 }, { "kind": 1, "label": "Blue birds", "target": 15, "color": 2 }, { "kind": 1, "label": "Yellow birds", "target": 15, "color": 5 }] }
+  ]
+}

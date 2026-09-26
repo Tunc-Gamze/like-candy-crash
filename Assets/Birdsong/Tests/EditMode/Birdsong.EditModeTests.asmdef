@@ -1,0 +1,6 @@
+{
+  "name": "Birdsong.EditModeTests",
+  "references": ["Birdsong.Runtime"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

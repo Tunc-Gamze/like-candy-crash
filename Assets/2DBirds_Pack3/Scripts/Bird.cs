@@ -5,7 +5,7 @@ public class Bird : MonoBehaviour
 {
     [Header("Identity")]
     public int birdType = 1;   // 1..5 (prefab tipi)
-    public int colorType = 0;  // Renk ID'si (0 = Red, 1 = Pink, 2 = Blue, 3 = Green, 4 = Yellow)
+    public int colorType = 0;  // Asset IDs: Red=0, Pink=1, Blue=2, Black=3, Orange=4, Yellow=5, Cyan=6, Green=7.
 
     [Header("Runtime")]
     public int xIndex = -1;    // Board'daki x koordinatı
@@ -69,7 +69,11 @@ public class Bird : MonoBehaviour
             col.enabled = false;
 
         // Uçma animasyonunu tetikle
-        if (animator != null)
+        bool hasFly = false;
+        if (animator != null && animator.runtimeAnimatorController != null)
+            foreach (var parameter in animator.parameters)
+                if (parameter.name == "Fly" && parameter.type == AnimatorControllerParameterType.Trigger) hasFly = true;
+        if (hasFly)
         {
             animator.SetTrigger("Fly");
         }
@@ -96,7 +100,7 @@ public class Bird : MonoBehaviour
             float progress = elapsed / flyAnimDuration;
             
             // Scale ve rotation ile basit uçma efekti
-            transform.localScale = originalScale * (1f + progress * 0.5f);
+            transform.localScale = originalScale * (1f - progress);
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(progress * Mathf.PI * 4) * 10f);
             
             yield return null;
@@ -146,7 +150,7 @@ public class Bird : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float progress = elapsed / moveAnimDuration;
-            float curveValue = moveCurve.Evaluate(progress);
+            float curveValue = moveCurve != null ? moveCurve.Evaluate(progress) : Mathf.SmoothStep(0, 1, progress);
             
             transform.position = Vector3.Lerp(startPosition, targetPosition, curveValue);
             
@@ -168,7 +172,7 @@ public class Bird : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float progress = elapsed / fallAnimDuration;
-            float curveValue = fallCurve.Evaluate(progress);
+            float curveValue = fallCurve != null ? fallCurve.Evaluate(progress) : Mathf.SmoothStep(0, 1, progress);
             
             transform.position = Vector3.Lerp(startPosition, targetPosition, curveValue);
             
@@ -221,14 +225,6 @@ public class Bird : MonoBehaviour
     }
 
     // Mouse tıklaması için (InputManager tarafından kullanılır)
-    void OnMouseDown()
-    {
-        if (!isMatched && !isMoving)
-        {
-            Debug.Log($"Clicked bird at ({xIndex}, {yIndex})");
-            // InputManager bu eventi yakalayacak
-        }
-    }
 
     // Drag & drop için ek özellikler
     public void SetDragState(bool isDragging)

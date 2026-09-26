@@ -1,0 +1,5 @@
+{
+  "name": "Birdsong.PlayModeTests",
+  "references": ["Birdsong.Runtime", "Unity.ugui"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

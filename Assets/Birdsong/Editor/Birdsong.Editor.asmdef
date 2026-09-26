@@ -1,0 +1,5 @@
+{
+  "name": "Birdsong.Editor",
+  "references": ["Birdsong.Runtime", "Unity.ugui"],
+  "includePlatforms": ["Editor"]
+}
